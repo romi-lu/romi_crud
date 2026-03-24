@@ -1,0 +1,46 @@
+:root {
+  --text: #3a3238;
+  --muted: #8a7a82;
+  --border: #f0e2e8;
+  --surface: #fffbfc;
+  --primary: #c2186b;
+  --primary-dark: #9d1458;
+  --accent-soft: #fce8f1;
+  --shadow: 0 4px 24px rgba(194, 24, 107, 0.09);
+  --font-sans: 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: linear-gradient(180deg, #fdf5f8 0%, #f8f0f4 55%, #f5eef8 100%);
+  background-attachment: fixed;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  outline-offset: 2px;
+}
+
+button.link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--primary);
+  cursor: pointer;
+  text-decoration: underline;
+}

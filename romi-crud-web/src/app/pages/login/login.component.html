@@ -1,0 +1,19 @@
+<div class="wrap">
+  <div class="card">
+    <h1>Ingreso</h1>
+    <p class="hint">Usuario demo: <strong>admin</strong> / <strong>admin123</strong></p>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <label>
+        Usuario
+        <input type="text" formControlName="username" autocomplete="username" />
+      </label>
+      <label>
+        Contraseña
+        <input type="password" formControlName="password" autocomplete="current-password" />
+      </label>
+      <button type="submit" [disabled]="form.invalid || busy()">
+        {{ busy() ? 'Entrando…' : 'Entrar' }}
+      </button>
+    </form>
+  </div>
+</div>

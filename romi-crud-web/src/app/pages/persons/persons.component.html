@@ -1,0 +1,110 @@
+<header class="top">
+  <div class="brand">
+    <span class="logo">Romi</span>
+    <span class="sub">CRUD Personas</span>
+  </div>
+  <nav>
+    <button type="button" class="ghost" (click)="forceErrorDemo()">Probar middleware (error)</button>
+    <button type="button" class="link" (click)="logout()">Cerrar sesión</button>
+  </nav>
+</header>
+
+@if (loading()) {
+  <p class="center muted">Cargando…</p>
+} @else {
+  <div class="layout">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Personas</h2>
+        <button type="button" class="primary sm" (click)="startCreate()">Nueva persona</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Documento</th>
+              <th>Tipo doc.</th>
+              <th>Tipo pers.</th>
+              <th>Género</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (p of persons(); track p.id) {
+              <tr>
+                <td>{{ p.lastName }}, {{ p.firstName }}</td>
+                <td>{{ p.documentNumber }}</td>
+                <td>{{ p.documentTypeName }}</td>
+                <td>{{ p.personTypeName }}</td>
+                <td>{{ p.genderName }}</td>
+                <td class="actions">
+                  <button type="button" class="linkish" (click)="startEdit(p)">Editar</button>
+                  <button type="button" class="linkish danger" (click)="deletePerson(p)">Eliminar</button>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="6" class="muted center">No hay personas. Creá la primera.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel form-panel">
+      <h2>{{ editingId() == null ? 'Alta' : 'Edición' }}</h2>
+      <form [formGroup]="form" (ngSubmit)="save()">
+        <div class="grid2">
+          <label>
+            Nombre
+            <input type="text" formControlName="firstName" />
+          </label>
+          <label>
+            Apellido
+            <input type="text" formControlName="lastName" />
+          </label>
+        </div>
+        <label>
+          Nº documento
+          <input type="text" formControlName="documentNumber" />
+        </label>
+        <div class="grid3">
+          <label>
+            Tipo documento
+            <select formControlName="documentTypeId">
+              @for (d of documentTypes(); track d.id) {
+                <option [value]="d.id">{{ d.name }}</option>
+              }
+            </select>
+          </label>
+          <label>
+            Tipo persona
+            <select formControlName="personTypeId">
+              @for (t of personTypes(); track t.id) {
+                <option [value]="t.id">{{ t.name }}</option>
+              }
+            </select>
+          </label>
+          <label>
+            Género
+            <select formControlName="genderId">
+              @for (g of genders(); track g.id) {
+                <option [value]="g.id">{{ g.name }}</option>
+              }
+            </select>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="primary" [disabled]="form.invalid || saving()">
+            {{ saving() ? 'Guardando…' : 'Guardar' }}
+          </button>
+          @if (editingId() != null) {
+            <button type="button" class="ghost" (click)="cancelForm()">Cancelar</button>
+          }
+        </div>
+      </form>
+    </section>
+  </div>
+}
