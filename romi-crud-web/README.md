@@ -1,6 +1,8 @@
-# RomiCrudWeb
+# RomiCrudWeb (front Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.6.
+Instrucciones para **clonar, base de datos, API y ejecución en otra PC**: ver el [README de la raíz del repositorio](../README.md).
+
+Este proyecto se generó con [Angular CLI](https://github.com/angular/angular-cli) 20.1.6.
 
 ## Development server
 
